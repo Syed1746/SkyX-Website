@@ -18,6 +18,9 @@
 	<link rel="shortcut icon" href="images/skyximg.png" type="image/x-icon">
 	<link rel="icon" href="images/skyximg.png" type="image/x-icon">
 
+	  <!-- font Awesome -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 	<!-- # Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,21 +166,22 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="contact-form">
-								<form action="#!">
+								<form id="contactForm" aria-labelledby="contactFormTitle">
 									<div class="form-group mb-4 pb-2">
-										<label for="exampleFormControlInput1" class="form-label">Full Name</label>
-										<input type="text" class="form-control shadow-none" id="contact_name">
+									  <label for="contact_name" class="form-label">Full Name</label>
+									  <input type="text" class="form-control shadow-none" id="contact_name" name="name" required aria-required="true">
 									</div>
 									<div class="form-group mb-4 pb-2">
-										<label for="exampleFormControlInput1" class="form-label">Email address</label>
-										<input type="email" class="form-control shadow-none" id="contact_email">
+									  <label for="contact_email" class="form-label">Email address</label>
+									  <input type="email" class="form-control shadow-none" id="contact_email" name="email" required aria-required="true">
 									</div>
 									<div class="form-group mb-4 pb-2">
-										<label for="exampleFormControlTextarea1" class="form-label">Write Message</label>
-										<textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="3"></textarea>
+									  <label for="message" class="form-label">Write Message</label>
+									  <textarea class="form-control shadow-none" id="message" name="message" rows="3" required aria-required="true"></textarea>
 									</div>
 									<button class="btn btn-primary w-100" type="submit">Send Message</button>
-								</form>
+								  </form>
+								  
 							</div>
 						</div>
 						<div class="col-lg-6 mt-5 mt-lg-0">
@@ -204,6 +208,8 @@
 										</li>
 										<li class="list-inline-item me-3"><a title="Explorer Instagram Profile" class="text-black" href="https://www.instagram.com/skyxdigisolutions/"><i class="fab fa-instagram"></i></a>
 										</li>
+										<li class="list-inline-item me-3"><a title="Explorer Instagram Profile" class="text-black" href="https://x.com/Skyxdigi"><i class="fab fa-x-twitter"></i></a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -229,7 +235,7 @@
 						<li class="mb-2"><a href="digtial.html">Digital Marketing</a>
 						</li>
 						<li class="mb-2"><a href="payservice.html">
-                            Pay-Per-Click Advertising</a>
+                          Business Consultation</a>
 						</li>
 						<li class="mb-2"><a href="searchservice.html">Search Engine Optimization</a>
 						</li>
@@ -277,6 +283,8 @@
 					</li>
 					<li class="list-inline-item me-3"><a title="Explorer Instagram Profile" class="text-black" href="https://www.instagram.com/skyxdigisolutions/"><i class="fab fa-instagram"></i></a>
 					</li>
+					<li class="list-inline-item me-3"><a title="Explorer Instagram Profile" class="text-black" href="https://x.com/Skyxdigi"><i class="fab fa-x-twitter"></i></a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -292,6 +300,51 @@
 
 <!-- Main Script -->
 <script src="js/script.js"></script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+	  document.getElementById('contactForm').addEventListener('submit', function(event) {
+		event.preventDefault(); // Prevent default form submission
+  
+		// Collect form data
+		const name = document.getElementById('contact_name').value;
+		const email = document.getElementById('contact_email').value;
+		const message = document.getElementById('message').value;
+  
+		if (name && email && message) {
+		  // Proceed with form submission
+		  submitForm(name, email, message);
+		} else {
+		  alert('Please fill in all fields.');
+		}
+	  });
+  
+	  function submitForm(name, email, message) {
+		// Implement AJAX request or form handling logic here
+		// Example using fetch API:
+		fetch('/submit-form', {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify({ name, email, message }),
+		})
+		.then(response => response.json())
+		.then(data => {
+		  if (data.success) {
+			alert('Message sent successfully!');
+		  } else {
+			alert('Your message sending failed.');
+		  }
+		})
+		.catch(error => {
+		  alert('An error occurred while sending the message.');
+		  console.error('Error:', error);
+		});
+	  }
+	});
+  </script>
+  
 
 </body>
 </html>
