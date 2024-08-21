@@ -168,18 +168,22 @@
 							<div class="contact-form">
 								<form id="contactForm" aria-labelledby="contactFormTitle">
 									<div class="form-group mb-4 pb-2">
-									  <label for="contact_name" class="form-label">Full Name</label>
+									  <label for="contact_name" id="name" class="form-label">Full Name</label>
 									  <input type="text" class="form-control shadow-none" id="contact_name" name="name" required aria-required="true">
 									</div>
 									<div class="form-group mb-4 pb-2">
-									  <label for="contact_email" class="form-label">Email address</label>
+									  <label for="contact_email" id="email" class="form-label">Email address</label>
 									  <input type="email" class="form-control shadow-none" id="contact_email" name="email" required aria-required="true">
 									</div>
 									<div class="form-group mb-4 pb-2">
-									  <label for="message" class="form-label">Write Message</label>
+										<label for="contact_subject" id="subject" class="form-label">Subject</label>
+										<input type="email" class="form-control shadow-none" id="contact_subject" name="email" required aria-required="true">
+									  </div>
+									<div class="form-group mb-4 pb-2">
+									  <label for="message" id="message" class="form-label">Write Message</label>
 									  <textarea class="form-control shadow-none" id="message" name="message" rows="3" required aria-required="true"></textarea>
 									</div>
-									<button class="btn btn-primary w-100" type="submit">Send Message</button>
+									<button class="btn btn-primary w-100" type="submit" onclick="sendMail()">Send Message</button>
 								  </form>
 								  
 							</div>
@@ -417,6 +421,25 @@
 	  }
 	});
   </script>
+  <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+	(function(){
+		emailjs.init({
+ 		publicKey: "obIbwErknBT32hwwx",
+	});
+	})();
+	</script>
+	<script>
+		function sendMail(){
+			let param={
+				name: document.getElementById("name").value,
+				email: document.getElementById("email").value,
+				subject:document.getElementById("subject").value,
+				message:document.getElementById("message").value,
+			}
+			emailjs.send("service_s8utakj","template_41asmpm",param).then(alert("Email Sent Sucessfully"))
+		}
+	</script>
   
 
 </body>
