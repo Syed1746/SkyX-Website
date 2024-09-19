@@ -9120,6 +9120,12 @@ img {
   border: 0;
   max-width: 100%;
   height: auto;
+} 
+.icon img{
+  vertical-align: middle;
+  border: 0;
+  max-width: 100%;
+  height: 50px;
 }
 
 a,
@@ -10160,7 +10166,7 @@ blockquote::before {
   margin-bottom: 20px;
   text-align: center;
   color: #fff;
-  background-color: #2899ba;
+  background-color: #28bbdab0;
 }
 
 .icon-lg {
